@@ -1,5 +1,6 @@
-FROM debian:stable
-#FROM debian:stable-slim
+FROM debian:stable-slim
+
+LABEL author="Michael Wharmby <mtwharmby>"
 
 RUN apt-get -q update
 RUN apt-get -yq install bind9-dyndb-ldap
