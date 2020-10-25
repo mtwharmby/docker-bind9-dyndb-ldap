@@ -18,12 +18,7 @@ chmod 640 /etc/bind/rndc.key
 chmod 2755 /etc/bind
 chown -R root:bind /etc/bind
 
-# Borrowed from the start function in /etc/init.d/bind from debian 10 (buster)
-# bind9_9.11.5.P4+dfsg-5.1+deb10u2_armhf.deb
-PIDFILE=/run/named/named.pid
-mkdir -p /run/named
-chmod 775 /run/named
-chown root:bind /run/named >/dev/null 2>&1 || true
-
-# Start command: hacked together from debian script again.
-exec /usr/sbin/named --pidfile ${PIDFILE} -- $OPTIONS
+# Start command.
+# -c <path> = config. named uses /etc/bind/named.conf by default
+# -g = daemonise, but push logging to STDERR (alternative is -f, no logging) 
+exec /usr/sbin/named -u bind -g $OPTIONS
