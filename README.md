@@ -27,9 +27,10 @@ $ docker buildx create --use --name mybuilder
 $ docker buildx inspect --bootstrap
 ```
 (The latter command is only to check we have the additional archs available)
+
 4) Build the image (this automatically uses the selected builder). It's important to log in to Dockerhub (or wherever; e.g. `docker login`) before you run the `--push`:
 ```
-$ docker buildx build --platform linux/amd64,linux/arm/v7 -t <username>/bind9-dyndb-ldap:latest --push .
+$ docker buildx build --platform linux/amd64,linux/arm/v7 -t <username>/bind9-dyndb-ldap:latest -t <username>/bind9-dyndb-ldap:<ver> --push .
 ```
 There seem to be ways to automate this process wityh Github/Gitlab... but I haven't investigated these:
 - https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/ (in the "Let’s go to production" section)
