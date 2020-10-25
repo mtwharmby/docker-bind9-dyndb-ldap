@@ -32,7 +32,7 @@ $ docker buildx inspect --bootstrap
 ```
 $ docker buildx build --platform linux/amd64,linux/arm/v7 -t <username>/bind9-dyndb-ldap:latest -t <username>/bind9-dyndb-ldap:<ver> --push .
 ```
-There seem to be ways to automate this process wityh Github/Gitlab... but I haven't investigated these:
+There seem to be ways to automate this process with Github/Gitlab... but I haven't investigated these:
 - https://www.docker.com/blog/multi-arch-build-and-images-the-simple-way/ (in the "Let’s go to production" section)
 - https://github.com/docker/buildx/issues/202#issuecomment-597375245
 
