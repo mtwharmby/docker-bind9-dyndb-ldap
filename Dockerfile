@@ -10,4 +10,4 @@ ADD ./container /container
 
 EXPOSE 53
 
-CMD [ "/container/startup.sh" ]
+ENTRYPOINT [ "/container/startup.sh" ]
