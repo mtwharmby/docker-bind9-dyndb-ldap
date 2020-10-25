@@ -2,8 +2,13 @@
 
 OPTIONS=""
 
-if [ ! -s /etc/named.conf ]; then
-    cp -ra /container/bind /etc/bind
+# Ensure we have a config file. If not, create one from the default debian one.
+if [ ! -s /etc/bind/named.conf ]; then
+    echo "No named.conf found. Copying default bind config..."
+    mkdir -p /etc/bind
+    cp -ra /container/bind/* /etc/bind/
+else
+    echo "Using existing named.conf..."
 fi
 # Ensure there is an rndc.key.
 # This was lifted from postinst script from debian 10 (buster)
