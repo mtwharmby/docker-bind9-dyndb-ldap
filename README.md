@@ -7,6 +7,14 @@ Bind9 DNS server with the bind-dyndb-ldap (https://pagure.io/bind-dyndb-ldap) ba
 
 To use your own config, mount a volume containing `named.conf` at `/etc/bind`.
 
+## LDAP Requirements
+bind9-dyndb-ldap relies on *LDAP Content Syncronisation Operation* ([RFC 4533](https://tools.ietf.org/html/rfc4533)) to do runtime synchronisation of DNS records ([bind9-dyndb-ldap design docs](https://docs.pagure.org/bind-dyndb-ldap/BIND9/Design/LdapSynchronizationOverview.html)). On an OpenLDAP server, this requires the inclusion of the *syncprov* module in the server config - the module is distributed as part of the [slapd](https://packages.debian.org/stable/slapd) package on debian. The database containing the bind9-dyndb-ldap configuration and zone data also needs to be configured with the *syncprov overlay*. A sample OpenLDAP LDIF which adds the necessary values is included in the repository - [syncprov.ldif](syncprov.ldif) - have a look at the [zytrax.com](https://www.zytrax.com/books/ldap/ch6/syncprov.html) for an explanation of the options included in the LDIF.
+
+To incorporate the changes:
+```
+$ ldapadd -x -H ldap://ldap-server-hostname -D "cn=admin,cn=config" -W -v  -f syncprov.ldif
+```
+
 ## Build Notes
 This project is built with multi-arch support through the `buildx` plugin (https://github.com/docker/buildx). To use this the following steps are necessary (with Docker v19.03 +). These notes are as much for myself as anyone else!
 

@@ -1,0 +1,14 @@
+dn: cn=module{0},cn=config
+changetype: modify
+add: olcModuleLoad
+olcModuleLoad: syncprov
+
+# Assumes database containing DNS data is olcDatabase={1}mdb,cn=config
+dn: olcOverlay=syncprov,olcDatabase={1}mdb,cn=config
+changetype: add
+objectClass: olcSyncProvConfig
+objectClass: olcOverlayConfig
+olcOverlay: syncprov
+olcSpCheckpoint: 100 10
+olcSpNoPresent: TRUE
+olcSpSessionlog: 100
