@@ -12,7 +12,7 @@ bind9-dyndb-ldap relies on *LDAP Content Syncronisation Operation* ([RFC 4533](h
 
 To incorporate the changes:
 ```
-$ ldapadd -x -H ldap://ldap-server-hostname -D "cn=admin,cn=config" -W -v  -f syncprov.ldif
+$ ldapadd -x -H ldap://ldap-server-hostname -D "cn=admin,cn=config" -W -v -f syncprov.ldif
 ```
 
 ## Build Notes
