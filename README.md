@@ -14,8 +14,12 @@ To incorporate the changes:
 ```
 $ ldapadd -x -H ldap://ldap-server-hostname -D "cn=admin,cn=config" -W -v -f syncprov.ldif
 ```
+## Notes
 
-## Build Notes
+### init Process:  tini
+A Docker container does not start an init process internally to reap zombie processes. As `named` creates a number of additional processes, it is important to have an PID=1 process capable of reaping zombie or  orphaned processes (see [Docker and the PID 1 zombie reaping problem](https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/)). Docker allow passing the `--init` flag when running the container, but this isn't available for kubernetes. [`tini`](https://github.com/krallin/tini), used by Docker to proved init-like capabilities with the `--init` flag, is set as the ENTRYPOINT. Running the `/container/startup.sh` as a command leaves `named` processes running under the watchful eye of `tini`.
+
+### Build Notes
 This project is built with multi-arch support through the `buildx` plugin (https://github.com/docker/buildx). To use this the following steps are necessary (with Docker v19.03 +). These notes are as much for myself as anyone else!
 
 1) [Install](https://github.com/docker/buildx#with-buildx-or-docker-1903 "buildx install notes"): 
