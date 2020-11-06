@@ -43,11 +43,17 @@ This project is built with multi-arch support through the `buildx` plugin (https
 4) Build the image (this automatically uses the selected builder).
    1) If building for the local docker instance:
         ```
-        $ docker buildx build --platform linux/amd64,linux/arm/v7 -t <username>/bind9-dyndb-ldap:latest -t <username>/bind9-dyndb-ldap:<ver> --output type=docker .
+        $ docker buildx build --platform linux/amd64,linux/arm/v7 \
+            -t <username>/bind9-dyndb-ldap:latest \
+            -t <username>/bind9-dyndb-ldap:<ver> \
+            --output type=docker .
         ```
    2) If building to push to DockerHub (or wherever) you need to login before doing the build (e.g. `docker login`):
         ```
-        $ docker buildx build --platform linux/amd64,linux/arm/v7 -t <username>/bind9-dyndb-ldap:latest -t <username>/bind9-dyndb-ldap:<ver> --push .
+        $ docker buildx build --platform linux/amd64,linux/arm/v7 \
+            -t <username>/bind9-dyndb-ldap:latest \
+            -t <username>/bind9-dyndb-ldap:<ver> 
+            --push .
         ```
     The only difference between these commands are the arguments `--output type=docker` and `--push` (synonymous with `--output type=registry`) (see [buildx commandline docs](https://docs.docker.com/engine/reference/commandline/buildx_build/) for more options).
 
