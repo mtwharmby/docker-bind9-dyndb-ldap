@@ -52,7 +52,7 @@ This project is built with multi-arch support through the `buildx` plugin (https
         ```
         $ docker buildx build --platform linux/amd64,linux/arm/v7 \
             -t <username>/bind9-dyndb-ldap:latest \
-            -t <username>/bind9-dyndb-ldap:<ver> 
+            -t <username>/bind9-dyndb-ldap:<ver> \
             --push .
         ```
     The only difference between these commands are the arguments `--output type=docker` and `--push` (synonymous with `--output type=registry`) (see [buildx commandline docs](https://docs.docker.com/engine/reference/commandline/buildx_build/) for more options).
