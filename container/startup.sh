@@ -23,7 +23,7 @@ chmod 640 /etc/bind/rndc.key
 chmod 2755 /etc/bind
 chown -R root:bind /etc/bind
 
-# Start command.
+# Start command. N.B. exec replaces the shell (i.e. this script with named)
 # -c <path> = config. named uses /etc/bind/named.conf by default
 # -g = daemonise, but push logging to STDERR (alternative is -f, no logging) 
 exec /usr/sbin/named -u bind -g $OPTIONS
