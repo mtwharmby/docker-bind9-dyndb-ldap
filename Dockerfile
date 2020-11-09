@@ -8,8 +8,9 @@ RUN apt-get -q clean
 
 ADD ./container /container
 
-EXPOSE 53
+EXPOSE 53/tcp
+EXPOSE 53/udp
 
 # Using tini to act to provide a basic init (see zombie process)
-ENTRYPOINT [ "/usr/bin/tini", "--" ]
+ENTRYPOINT [ "/container/init.sh" ]
 CMD [ "/container/startup.sh" ]
